@@ -238,6 +238,8 @@ public class LetterGridController : MonoBehaviour {
 					GridLetters[wordPlaceY][wordPlaceX].GetComponent<GridLetter>().isEndLetter = true;
 				}
 
+				//GridLetters[wordPlaceY][wordPlaceX].GetComponent<GridLetter>().setWord();
+
 				wordPlaceX += (int) direction.x;
 				wordPlaceY += (int) direction.y;
 			}

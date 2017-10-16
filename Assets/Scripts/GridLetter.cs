@@ -30,6 +30,7 @@ public class GridLetter : MonoBehaviour {
 		if(!highlighting && isEndLetter){
 			Debug.Log(letter);
 			highlighting = true;
+			//gridWord.startDrag();
 		}
 	}
 
@@ -37,12 +38,16 @@ public class GridLetter : MonoBehaviour {
 		//if(isEndLetter){
 			Debug.Log(letter);
 			highlighting = false;
+			//gridWord.endDrag();
 		//}
 	}
 
 	public void enterLetter(){
 		if(isEndLetter){
 			Debug.Log(letter);
+			if(highlighting){
+				Debug.Log("word found");
+			}
 		}
 	}
 
