@@ -27,26 +27,27 @@ public class GridLetter : MonoBehaviour {
 	}
 
 	public void startWordDrag(){
-		if(!highlighting && isEndLetter){
+		if(!isRandomLetter && !highlighting && isEndLetter){
 			Debug.Log(letter);
 			highlighting = true;
-			//gridWord.startDrag();
+			gridWord.startDrag();
 		}
 	}
 
 	public void endWordDrag(){
-		//if(isEndLetter){
+		if(!isRandomLetter){
 			Debug.Log(letter);
 			highlighting = false;
-			//gridWord.endDrag();
-		//}
+			gridWord.endDrag();
+		}
 	}
 
 	public void enterLetter(){
 		if(isEndLetter){
 			Debug.Log(letter);
-			if(highlighting){
+			if(gridWord.highlighting && !highlighting){
 				Debug.Log("word found");
+				gridWord.highlightWord();
 			}
 		}
 	}

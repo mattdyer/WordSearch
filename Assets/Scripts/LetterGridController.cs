@@ -229,22 +229,28 @@ public class LetterGridController : MonoBehaviour {
 			wordPlaceX = foundX;
 			wordPlaceY = foundY;
 
-			for(int li = 0;li < word.Length;li++){
-				GridLetters[wordPlaceY][wordPlaceX].GetComponent<GridLetter>().letter = word[li];
+			GridWord gridWord = new GridWord(word,foundX,foundY,direction);
 
-				GridLetters[wordPlaceY][wordPlaceX].GetComponent<GridLetter>().displayLetter.GetComponent<Text>().text = word[li].ToString();
-				GridLetters[wordPlaceY][wordPlaceX].GetComponent<GridLetter>().isRandomLetter = false;
+			for(int li = 0;li < word.Length;li++){
+				GridLetter gridLetter = GridLetters[wordPlaceY][wordPlaceX].GetComponent<GridLetter>();
+
+				gridLetter.letter = word[li];
+
+				gridLetter.displayLetter.GetComponent<Text>().text = word[li].ToString();
+				gridLetter.isRandomLetter = false;
 				if(li == 0 || li == word.Length - 1){
-					GridLetters[wordPlaceY][wordPlaceX].GetComponent<GridLetter>().isEndLetter = true;
+					gridLetter.isEndLetter = true;
 				}
 
-				//GridLetters[wordPlaceY][wordPlaceX].GetComponent<GridLetter>().setWord();
+				gridLetter.setWord(gridWord);
+
+				gridWord.addLetter(gridLetter);
 
 				wordPlaceX += (int) direction.x;
 				wordPlaceY += (int) direction.y;
 			}
 
-			GridWords.Add(new GridWord(word,foundX,foundY,direction));
+			GridWords.Add(gridWord);
 		}
 
 		return wordPlaced;
