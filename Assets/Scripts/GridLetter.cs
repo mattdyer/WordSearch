@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GridLetter : MonoBehaviour {
 
@@ -7,12 +8,10 @@ public class GridLetter : MonoBehaviour {
 	public int y;
 	
 	public GameObject displayLetter;
-	public GridWord gridWord;
+	private List<GridWord> words = new List<GridWord>();
 
 	public bool isRandomLetter = true;
-
 	public bool isEndLetter = false;
-
 	public bool highlighting = false;
 
 	public GridLetter(char letter,int x,int y,GameObject displayLetter){
@@ -22,15 +21,21 @@ public class GridLetter : MonoBehaviour {
 		this.displayLetter = displayLetter;
 	}
 
-	public void setWord(GridWord word){
-		gridWord = word;
+	public void addWord(GridWord word){
+		if(words == null){
+			words = new List<GridWord>();
+		}
+		words.Add(word);
 	}
 
 	public void startWordDrag(){
 		if(!isRandomLetter && !highlighting && isEndLetter){
 			Debug.Log(letter);
 			highlighting = true;
-			gridWord.startDrag();
+			for(int i = 0;i < words.Count;i++){
+				words[i].startDrag();
+			}
+			
 		}
 	}
 
@@ -38,16 +43,20 @@ public class GridLetter : MonoBehaviour {
 		if(!isRandomLetter){
 			Debug.Log(letter);
 			highlighting = false;
-			gridWord.endDrag();
+			for(int i = 0;i < words.Count;i++){
+				words[i].endDrag();
+			}
 		}
 	}
 
 	public void enterLetter(){
 		if(isEndLetter){
 			Debug.Log(letter);
-			if(gridWord.highlighting && !highlighting){
-				Debug.Log("word found");
-				gridWord.highlightWord();
+			for(int i = 0;i < words.Count;i++){
+				if(words[i].highlighting && !highlighting){
+					Debug.Log("word found");
+					words[i].highlightWord();
+				}
 			}
 		}
 	}

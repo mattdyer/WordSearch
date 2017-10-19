@@ -13,10 +13,10 @@ public class GridWord {
 	private List<GridLetter> Letters = new List<GridLetter>();
 
 	public GridWord(string wordtext,int x,int y,Vector2 dir){
-		word = wordtext;
-		startX = x;
-		startY = y;
-		direction = dir;
+		this.word = wordtext;
+		this.startX = x;
+		this.startY = y;
+		this.direction = dir;
 	}
 
 	public void startDrag(){

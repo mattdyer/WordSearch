@@ -149,6 +149,10 @@ public class LetterGridController : MonoBehaviour {
 
 		Debug.Log(wordsPlaced);
 
+		for(int i = 0;i < GridWords.Count;i++){
+			Debug.Log(GridWords[i].word);
+		}
+
 	}
 
 
@@ -242,9 +246,10 @@ public class LetterGridController : MonoBehaviour {
 					gridLetter.isEndLetter = true;
 				}
 
-				gridLetter.setWord(gridWord);
+				//Debug.Log()
 
 				gridWord.addLetter(gridLetter);
+				gridLetter.addWord(gridWord);
 
 				wordPlaceX += (int) direction.x;
 				wordPlaceY += (int) direction.y;
