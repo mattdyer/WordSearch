@@ -30,7 +30,6 @@ public class GridLetter : MonoBehaviour {
 
 	public void startWordDrag(){
 		if(!isRandomLetter && !highlighting && isEndLetter){
-			Debug.Log(letter);
 			highlighting = true;
 			for(int i = 0;i < words.Count;i++){
 				words[i].startDrag();
@@ -41,7 +40,6 @@ public class GridLetter : MonoBehaviour {
 
 	public void endWordDrag(){
 		if(!isRandomLetter){
-			Debug.Log(letter);
 			highlighting = false;
 			for(int i = 0;i < words.Count;i++){
 				words[i].endDrag();
@@ -51,10 +49,8 @@ public class GridLetter : MonoBehaviour {
 
 	public void enterLetter(){
 		if(isEndLetter){
-			Debug.Log(letter);
 			for(int i = 0;i < words.Count;i++){
 				if(words[i].highlighting && !highlighting){
-					Debug.Log("word found");
 					words[i].highlightWord();
 				}
 			}

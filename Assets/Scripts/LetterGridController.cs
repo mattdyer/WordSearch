@@ -36,6 +36,8 @@ public class LetterGridController : MonoBehaviour {
 		FillInLetters();
 		AddWords();
 
+		DisplayWords();
+
 		//wordsInGrid = PlayerPrefs.GetInt("WordsInGrid",defaultWordsInGrid);
 	}
 	
@@ -51,24 +53,13 @@ public class LetterGridController : MonoBehaviour {
 
 		Debug.Log(Screen.width);
 
-		var letterWidth = 30;
-		var letterHeight = 30;
+		var letterWidth = Convert.ToInt32(Screen.width * 0.04);
+		var letterHeight = Convert.ToInt32(Screen.width * 0.04);
 
-		gridWidth = Screen.width/letterWidth;
+		int letterGridWidth = Convert.ToInt32(Screen.width * 0.80);
+
+		gridWidth = letterGridWidth/letterWidth;
 		gridHeight = Screen.height/letterHeight;
-
-		//GameObject mainCanvas = GameObject.FindWithTag("MainCanvas");
-		//GameObject letterGrid = GameObject.FindWithTag("LetterGrid");
-
-		//Debug.Log(mainCanvas.transform.position.x);
-
-		//letterGrid.transform.position = new Vector3(0,0,letterGrid.transform.position.z);
-
-		//letterGrid.width = 0;
-
-		//letter = GameObject.FindWithTag("LetterBox");
-
-		//letter.transform.position = new Vector3((Screen.width / -2),Screen.height / 2,letter.transform.position.z);
 
 		for(var j = 0;j < gridHeight;j++){
 			GridLetters.Add(new List<GameObject>());
@@ -96,9 +87,6 @@ public class LetterGridController : MonoBehaviour {
 
 				GridLetters[j].Add(letter);
 
-				//GridLetters[j].Add(new GridLetter((char) randomLetter,i,j,letter));
-
-				//Debug.Log(randomLetter);
 			}
 		}
 
@@ -133,10 +121,6 @@ public class LetterGridController : MonoBehaviour {
 
 			randomWord = Words[randomWordIndex];
 
-			//randomWord = "testing";
-
-			//Debug.Log(randomWord.Length);
-
 			if(randomWord.Length <= MaxWordLength){
 				if(tryToAddWordToGrid(randomWord)){
 					wordsPlaced++;
@@ -148,10 +132,6 @@ public class LetterGridController : MonoBehaviour {
 		}
 
 		Debug.Log(wordsPlaced);
-
-		for(int i = 0;i < GridWords.Count;i++){
-			Debug.Log(GridWords[i].word);
-		}
 
 	}
 
@@ -166,20 +146,12 @@ public class LetterGridController : MonoBehaviour {
 
 		Vector2 direction = Directions[randomDirectionIndex];
 
-		//Debug.Log(word.Length);
-		//Debug.Log(direction);
-		Debug.Log(word);
-
 		int xMin = direction.x == -1 ? word.Length - 1 : 0;// 1 or word.Length
 		int xMax = direction.x == 1 ? gridWidth - word.Length : gridWidth - 1;//gridWidth or GridWidth - word.Length
 
 		int yMin = direction.y == -1 ? word.Length - 1 : 0;//1 or word.Length
 		int yMax = direction.y == 1 ? gridHeight - word.Length + 1 : gridHeight - 1;//gridHeight or GridHeight - word.Length
 
-		//Debug.Log(xMin.ToString() + ' ' + xMax.ToString() + ' ' + yMin.ToString() + ' ' + yMax.ToString());
-		//Debug.Log(xMax);
-		//Debug.Log(yMin);
-		//Debug.Log(yMax);
 
 		GameObject checkLetter;
 
@@ -201,7 +173,6 @@ public class LetterGridController : MonoBehaviour {
 						if(gridY < GridLetters.Count && gridX < GridLetters[gridY].Count){
 							checkLetter = GridLetters[gridY][gridX];
 							GridLetter gridLetter = checkLetter.GetComponent<GridLetter>();
-							//Debug.Log(gridLetter.isRandomLetter);
 							if(gridLetter.isRandomLetter || gridLetter.letter == word[li]){
 								//wordPlaced = true;
 							}else{
@@ -220,7 +191,6 @@ public class LetterGridController : MonoBehaviour {
 						foundY = y;
 					}
 
-					//Debug.Log(GridLetters[y][x].letter);
 				}
 			}
 		}
@@ -246,8 +216,6 @@ public class LetterGridController : MonoBehaviour {
 					gridLetter.isEndLetter = true;
 				}
 
-				//Debug.Log()
-
 				gridWord.addLetter(gridLetter);
 				gridLetter.addWord(gridWord);
 
@@ -261,7 +229,25 @@ public class LetterGridController : MonoBehaviour {
 		return wordPlaced;
 	}
 
+	private void DisplayWords(){
+		
+		GameObject displayWord;
 
+		int wordHeight = Convert.ToInt32(Screen.width * 0.03);
+
+		for(int i = 0;i < GridWords.Count;i++){
+			displayWord = Instantiate(GameObject.FindWithTag("WordBox"));
+
+			displayWord.tag = "Untagged";
+				
+			displayWord.transform.position = new Vector3(Screen.width - (float)(Screen.width * 0.18),displayWord.transform.position.y - (wordHeight * (i + 2)),displayWord.transform.position.z);
+			displayWord.transform.SetParent(transform,false);
+			
+			displayWord.GetComponent<Text>().text = GridWords[i].word;
+
+			GridWords[i].setDisplayWord(displayWord);
+		}
+	}
 
 
 

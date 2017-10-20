@@ -11,6 +11,7 @@ public class GridWord {
 	public bool highlighting = false;
 	public bool found = false;
 	private List<GridLetter> Letters = new List<GridLetter>();
+	private GameObject displayWord;
 
 	public GridWord(string wordtext,int x,int y,Vector2 dir){
 		this.word = wordtext;
@@ -20,7 +21,6 @@ public class GridWord {
 	}
 
 	public void startDrag(){
-		Debug.Log(word);
 		highlighting = true;
 	}
 
@@ -33,7 +33,6 @@ public class GridWord {
 
 		for(int i = 0;i < Letters.Count;i++){
 			Letters[i].displayLetter.GetComponent<Text>().color = new Color(1,1,1,1);
-			Debug.Log(Letters[i].letter);
 		}
 
 		found = true;
@@ -43,6 +42,10 @@ public class GridWord {
 
 	public void addLetter(GridLetter letter){
 		Letters.Add(letter);
+	}
+
+	public void setDisplayWord(GameObject displayWord){
+		this.displayWord = displayWord;
 	}
 
 }
