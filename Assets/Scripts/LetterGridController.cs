@@ -53,8 +53,19 @@ public class LetterGridController : MonoBehaviour {
 
 		Debug.Log(Screen.width);
 
-		var letterWidth = Convert.ToInt32(Screen.width * 0.04);
-		var letterHeight = Convert.ToInt32(Screen.width * 0.04);
+		int letterWidth = 0;
+		int letterHeight = 0;
+
+		double letterScreenPortion = 0.04;
+
+		if(Screen.width > Screen.height){
+			letterWidth = Convert.ToInt32(Screen.width * letterScreenPortion);
+			letterHeight = Convert.ToInt32(Screen.width * letterScreenPortion);
+		}else{
+			letterWidth = Convert.ToInt32(Screen.height * letterScreenPortion);
+			letterHeight = Convert.ToInt32(Screen.height * letterScreenPortion);
+		}
+		
 
 		int letterGridWidth = Convert.ToInt32(Screen.width * 0.80);
 
@@ -67,7 +78,9 @@ public class LetterGridController : MonoBehaviour {
 				letter = Instantiate(GameObject.FindWithTag("LetterBox"));
 				letter.tag = "Untagged";
 				
-				letter.transform.position = new Vector3(letter.transform.position.x + letterWidth * (i + 1),letter.transform.position.y - letterHeight * (j + 2) + 20,letter.transform.position.z);
+				//letter.transform.position = new Vector3(letter.transform.position.x + letterWidth * (i + 1),letter.transform.position.y - letterHeight * (j + 2) + 20,letter.transform.position.z);
+				letter.transform.position = new Vector3(letterWidth * (i + 1),letterHeight * (j + 3) - Screen.height,letter.transform.position.z);
+				//letter.transform.position = new Vector3(0,0,letter.transform.position.z);
 				letter.transform.SetParent(transform,false);
 				
 				letterText = letter.GetComponent<Text>();
@@ -233,7 +246,15 @@ public class LetterGridController : MonoBehaviour {
 		
 		GameObject displayWord;
 
-		int wordHeight = Convert.ToInt32(Screen.width * 0.025);
+		int wordHeight = 0;
+
+		double wordHeightPortion = 0.025;
+
+		if(Screen.width > Screen.height){
+			wordHeight = Convert.ToInt32(Screen.width * wordHeightPortion);
+		}else{
+			wordHeight = Convert.ToInt32(Screen.height * wordHeightPortion);
+		}
 
 		for(int i = 0;i < GridWords.Count;i++){
 			displayWord = Instantiate(GameObject.FindWithTag("WordBox"));
