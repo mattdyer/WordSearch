@@ -38,6 +38,8 @@ public class GridWord {
 		found = true;
 		highlighting = false;
 
+		displayWord.GetComponent<Text>().color = new Color(1,1,1,1);
+
 	}
 
 	public void addLetter(GridLetter letter){

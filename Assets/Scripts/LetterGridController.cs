@@ -83,7 +83,7 @@ public class LetterGridController : MonoBehaviour {
 				gridLetter.displayLetter = letter;
 
 				//letterText.text = ((char) randomLetter).ToString() + ' ' + i.ToString() + ' ' + j.ToString();
-				letterText.text = ((char) randomLetter).ToString();
+				letterText.text = ((char) randomLetter).ToString().ToUpper();
 
 				GridLetters[j].Add(letter);
 
@@ -210,7 +210,7 @@ public class LetterGridController : MonoBehaviour {
 
 				gridLetter.letter = word[li];
 
-				gridLetter.displayLetter.GetComponent<Text>().text = word[li].ToString();
+				gridLetter.displayLetter.GetComponent<Text>().text = word[li].ToString().ToUpper();
 				gridLetter.isRandomLetter = false;
 				if(li == 0 || li == word.Length - 1){
 					gridLetter.isEndLetter = true;
@@ -233,7 +233,7 @@ public class LetterGridController : MonoBehaviour {
 		
 		GameObject displayWord;
 
-		int wordHeight = Convert.ToInt32(Screen.width * 0.03);
+		int wordHeight = Convert.ToInt32(Screen.width * 0.025);
 
 		for(int i = 0;i < GridWords.Count;i++){
 			displayWord = Instantiate(GameObject.FindWithTag("WordBox"));
@@ -242,8 +242,8 @@ public class LetterGridController : MonoBehaviour {
 				
 			displayWord.transform.position = new Vector3(Screen.width - (float)(Screen.width * 0.18),displayWord.transform.position.y - (wordHeight * (i + 2)),displayWord.transform.position.z);
 			displayWord.transform.SetParent(transform,false);
-			
-			displayWord.GetComponent<Text>().text = GridWords[i].word;
+
+			displayWord.GetComponent<Text>().text = GridWords[i].word.ToUpper();
 
 			GridWords[i].setDisplayWord(displayWord);
 		}
