@@ -125,7 +125,7 @@ public class LetterGridController : MonoBehaviour {
 		int wordsPlaced = 0;
 
 		int wordsTried = 0;
-		int maxWordsToTry = 20;
+		int maxWordsToTry = 50;
 
 		Debug.Log(wordsInGrid);
 
@@ -250,18 +250,20 @@ public class LetterGridController : MonoBehaviour {
 
 		double wordHeightPortion = 0.025;
 
-		if(Screen.width > Screen.height){
+		/*if(Screen.width > Screen.height){
 			wordHeight = Convert.ToInt32(Screen.width * wordHeightPortion);
 		}else{
 			wordHeight = Convert.ToInt32(Screen.height * wordHeightPortion);
-		}
+		}*/
+
+		wordHeight = Convert.ToInt32(Screen.height / GridWords.Count);
 
 		for(int i = 0;i < GridWords.Count;i++){
 			displayWord = Instantiate(GameObject.FindWithTag("WordBox"));
 
 			displayWord.tag = "Untagged";
-				
-			displayWord.transform.position = new Vector3(Screen.width - (float)(Screen.width * 0.18),displayWord.transform.position.y - (wordHeight * (i + 2)),displayWord.transform.position.z);
+			Debug.Log(GridWords[i].word);
+			displayWord.transform.position = new Vector3(Screen.width - (float)(Screen.width * 0.12),wordHeight * (i + 4) - Screen.height,displayWord.transform.position.z);
 			displayWord.transform.SetParent(transform,false);
 
 			displayWord.GetComponent<Text>().text = GridWords[i].word.ToUpper();
