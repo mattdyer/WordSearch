@@ -142,7 +142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 143.00009}
+  m_AnchoredPosition: {x: 50, y: 143.00006}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 2.6480093}
 --- !u!114 &141587974
@@ -623,7 +623,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 866532114}
           m_MethodName: startWordDrag
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -640,7 +640,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 866532114}
           m_MethodName: endWordDrag
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -657,7 +657,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 866532114}
           m_MethodName: enterLetter
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
