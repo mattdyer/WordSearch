@@ -80,6 +80,7 @@ public class LetterGridController : MonoBehaviour {
 				
 				//letter.transform.position = new Vector3(letter.transform.position.x + letterWidth * (i + 1),letter.transform.position.y - letterHeight * (j + 2) + 20,letter.transform.position.z);
 				letter.transform.position = new Vector3(letterWidth * (i + 1),letterHeight * (j + 3) - Screen.height,letter.transform.position.z);
+				letter.GetComponent<RectTransform>().sizeDelta = new Vector2(letterWidth,letterHeight);
 				//letter.transform.position = new Vector3(0,0,letter.transform.position.z);
 				letter.transform.SetParent(transform,false);
 				
@@ -97,6 +98,7 @@ public class LetterGridController : MonoBehaviour {
 
 				//letterText.text = ((char) randomLetter).ToString() + ' ' + i.ToString() + ' ' + j.ToString();
 				letterText.text = ((char) randomLetter).ToString().ToUpper();
+				letterText.fontSize = Convert.ToInt32(letterHeight / 2);
 
 				GridLetters[j].Add(letter);
 
@@ -248,7 +250,7 @@ public class LetterGridController : MonoBehaviour {
 
 		int wordHeight = 0;
 
-		double wordHeightPortion = 0.025;
+		double wordHeightPortion = Screen.height / wordsInGrid;
 
 		/*if(Screen.width > Screen.height){
 			wordHeight = Convert.ToInt32(Screen.width * wordHeightPortion);
@@ -263,10 +265,12 @@ public class LetterGridController : MonoBehaviour {
 
 			displayWord.tag = "Untagged";
 			Debug.Log(GridWords[i].word);
-			displayWord.transform.position = new Vector3(Screen.width - (float)(Screen.width * 0.12),wordHeight * (i + 4) - Screen.height,displayWord.transform.position.z);
+			displayWord.transform.position = new Vector3(Screen.width - (float)(Screen.width * 0.12),wordHeight * (i + 3) - Screen.height,displayWord.transform.position.z);
 			displayWord.transform.SetParent(transform,false);
+			displayWord.GetComponent<RectTransform>().sizeDelta = new Vector2((float)(Screen.width * 0.16),wordHeight);
 
 			displayWord.GetComponent<Text>().text = GridWords[i].word.ToUpper();
+			displayWord.GetComponent<Text>().fontSize = Convert.ToInt32(wordHeight * 0.5);
 
 			GridWords[i].setDisplayWord(displayWord);
 		}

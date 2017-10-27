@@ -29,20 +29,9 @@ public class GridLetter : MonoBehaviour {
 		words.Add(word);
 	}
 
-	/*public void startWordDrag(){
-		if(!isRandomLetter && !highlighting && isEndLetter){
-			highlighting = true;
-			for(int i = 0;i < words.Count;i++){
-				words[i].startDrag();
-			}
-			
-		}
-	}*/
-
-
 	public void startWordDrag(BaseEventData data){
 
-		Debug.Log(data);
+		Debug.Log(((PointerEventData) data).position);
 
 		if(!isRandomLetter && !highlighting && isEndLetter){
 			highlighting = true;
@@ -54,6 +43,8 @@ public class GridLetter : MonoBehaviour {
 	}
 
 	public void endWordDrag(BaseEventData data){
+		Debug.Log(((PointerEventData) data).position);
+		
 		if(!isRandomLetter){
 			highlighting = false;
 			for(int i = 0;i < words.Count;i++){
@@ -62,23 +53,8 @@ public class GridLetter : MonoBehaviour {
 		}
 	}
 
-	/*public void enterLetter(){
-		
-		Event e = Event.current;
-
-		Debug.Log(e);
-
-		if(isEndLetter){
-			for(int i = 0;i < words.Count;i++){
-				if(words[i].highlighting && !highlighting){
-					words[i].highlightWord();
-				}
-			}
-		}
-	}*/
-
 	public void enterLetter(BaseEventData data){
-		Debug.Log(data);
+		Debug.Log(((PointerEventData) data).position);
 
 		if(isEndLetter){
 			for(int i = 0;i < words.Count;i++){
@@ -88,5 +64,6 @@ public class GridLetter : MonoBehaviour {
 			}
 		}
 	}
+
 
 }
