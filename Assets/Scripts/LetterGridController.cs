@@ -265,7 +265,7 @@ public class LetterGridController : MonoBehaviour {
 
 			displayWord.tag = "Untagged";
 			Debug.Log(GridWords[i].word);
-			displayWord.transform.position = new Vector3(Screen.width - (float)(Screen.width * 0.12),wordHeight * (i + 3) - Screen.height,displayWord.transform.position.z);
+			displayWord.transform.position = new Vector3(Screen.width - (float)(Screen.width * 0.10),wordHeight * (i + 3) - Screen.height,displayWord.transform.position.z);
 			displayWord.transform.SetParent(transform,false);
 			displayWord.GetComponent<RectTransform>().sizeDelta = new Vector2((float)(Screen.width * 0.16),wordHeight);
 
