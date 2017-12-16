@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class GridWord {
+public class GridWord : MonoBehaviour {
 
 	public string word;
 	public int startX;
@@ -39,6 +39,18 @@ public class GridWord {
 		highlighting = false;
 
 		displayWord.GetComponent<Text>().color = new Color(1,1,1,1);
+
+		GameObject highlightIndicator = Instantiate(GameObject.FindWithTag("WordHighlight"));
+
+		highlightIndicator.transform.position = new Vector3(0,0,0);
+
+		Quaternion highlightRotation = new Quaternion();
+
+		highlightRotation.SetFromToRotation(new Vector3(direction.x, direction.y, 0),new Vector3(0,1,0));
+
+		highlightIndicator.transform.rotation = highlightIndicator.transform.rotation * highlightRotation;
+
+		highlightIndicator.transform.SetParent(Letters[1].displayLetter.transform,false);
 
 	}
 
