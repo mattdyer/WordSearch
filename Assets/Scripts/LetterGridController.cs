@@ -94,6 +94,7 @@ public class LetterGridController : MonoBehaviour {
 				gridLetter.x = i;
 				gridLetter.y = j;
 				gridLetter.isRandomLetter = true;
+				gridLetter.letterHeight = letterHeight;
 				gridLetter.displayLetter = letter;
 
 				//letterText.text = ((char) randomLetter).ToString() + ' ' + i.ToString() + ' ' + j.ToString();

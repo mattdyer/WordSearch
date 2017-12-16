@@ -10,8 +10,10 @@ public class GridWord : MonoBehaviour {
 	public Vector2 direction;
 	public bool highlighting = false;
 	public bool found = false;
+
 	private List<GridLetter> Letters = new List<GridLetter>();
 	private GameObject displayWord;
+
 
 	public GridWord(string wordtext,int x,int y,Vector2 dir){
 		this.word = wordtext;
@@ -42,11 +44,13 @@ public class GridWord : MonoBehaviour {
 
 		GameObject highlightIndicator = Instantiate(GameObject.FindWithTag("WordHighlight"));
 
-		highlightIndicator.transform.position = new Vector3(0,0,0);
+		highlightIndicator.transform.localScale += new Vector3(0,Letters.Count * Letters[1].letterHeight,0);
+		
+		highlightIndicator.transform.position = new Vector3(0,-Letters[1].letterHeight * 2,0);
 
 		Quaternion highlightRotation = new Quaternion();
 
-		highlightRotation.SetFromToRotation(new Vector3(direction.x, direction.y, 0),new Vector3(0,1,0));
+		highlightRotation.SetFromToRotation(new Vector3(0,1,0),new Vector3(direction.x, direction.y, 0));
 
 		highlightIndicator.transform.rotation = highlightIndicator.transform.rotation * highlightRotation;
 

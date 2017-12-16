@@ -14,14 +14,16 @@ public class GridLetter : MonoBehaviour {
 	public bool isRandomLetter = true;
 	public bool isEndLetter = false;
 	public bool highlighting = false;
+	public int letterHeight;
 
 	private GameObject highlightIndicator;
 
 
-	public GridLetter(char letter,int x,int y,GameObject displayLetter){
+	public GridLetter(char letter,int x,int y,int letterHeight,GameObject displayLetter){
 		this.letter = letter;
 		this.x = x;
 		this.y = y;
+		this.letterHeight = letterHeight;
 		this.displayLetter = displayLetter;
 	}
 
